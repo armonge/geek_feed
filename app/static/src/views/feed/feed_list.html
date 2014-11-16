@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Welcome to Geek feed!</h1>
+            <ul>
+                <li ng-repeat='feed in Feeds.feeds'>
+                    <a ng-href="#/feed/{{ feed.slug }}">{{ feed.title }}</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>

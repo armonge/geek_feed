@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ feed.title }}</h1>
+            <ul>
+                <li ng-repeat='event in feed.events'>
+                    {{ event.body }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <div class="team" ng-repeat='team in feed.teams'>
+                <h3>{{ team.name }}</h3>
+                <ul>
+                    <li ng-repeat='player in team.players'>{{ player }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
