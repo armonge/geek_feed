@@ -10,8 +10,8 @@ p_client = pusher.Pusher(
     secret=app.config['PUSHER_SECRET'])
 
 
-def push_event_created_notification(event, **kwargs):
-    p_client[event['slug']].trigger('new-event', event)
+def push_event_created_notification(match_slug, event, **kwargs):
+    p_client[match_slug].trigger('new-event', event)
 
 
 def push_match_created_notification(match, **kwargs):

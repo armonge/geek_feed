@@ -3,12 +3,13 @@
         <div class="col-md-8">
             <h1>{{ feed.title }}</h1>
             <ul>
-                <li ng-repeat='event in feed.events'>
+                <li ng-repeat='event in feed.events track by event.id'>
                     {{ event.body }}
                 </li>
             </ul>
         </div>
         <div class="col-md-4">
+                <a ng-href="#/feed/{{ feed.slug }}/push">Send events</a>
             <div class="team" ng-repeat='team in feed.teams'>
                 <h3>{{ team.name }}</h3>
                 <ul>

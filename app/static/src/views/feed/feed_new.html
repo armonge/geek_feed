@@ -1,0 +1,23 @@
+<div class="col-sm-8">
+    <h1>Create new Feed</h1>
+    <form class='form form-horizontal' name='form' ng-submit='createFeed(feed)'>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="title">Title: </label>
+            <div class="col-sm-8">
+                <input class="form-control" type="text" required name='title'
+                    id='title' ng-model='feed.title'>
+            </div>
+        </div>
+        <div class="col-sm-offset-3">
+            <input type="submit" class='btn btn-primary' ng-disabled='form.$invalid'>
+        </div>
+
+    </form>
+</div>
+<div class="col-sm-4">
+    <ul>
+        <li ng-repeat='event in feed.events track by event.id'>
+            {{ event.body }}
+        </li>
+    </ul>
+</div>

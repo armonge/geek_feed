@@ -1,0 +1,30 @@
+<div class="col-sm-8">
+    <h1>{{ feed.title }}</h1>
+    <form class='form form-horizontal' name='form' ng-submit='pushEvent(event)'>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="minute">Minute: </label>
+            <div class="col-sm-2">
+                <input class="form-control" name='minute'
+                    ng-model='event.minute' id='minute' type="number"
+                    min='0' max='40' step='1'>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="body" >Body:</label>
+            <div class="col-sm-8">
+                <textarea id="body" class='form-control' name='body' ng-model='event.body'
+                    required></textarea>
+            </div>
+        </div>
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default" ng-disabled='form.$invalid'>Push Event</button>
+        </div>
+    </form>
+</div>
+<div class="col-sm-4">
+    <ul>
+        <li ng-repeat='event in feed.events track by event.id'>
+            {{ event.body }}
+        </li>
+    </ul>
+</div>
