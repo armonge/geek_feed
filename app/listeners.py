@@ -1,18 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, print_function, absolute_import
 
-import pusher
-from . import app
-
-p_client = pusher.Pusher(
-    app_id=app.config['PUSHER_APP'],
-    key=app.config['PUSHER_KEY'],
-    secret=app.config['PUSHER_SECRET'])
-
+from .utils import send
 
 def push_event_created_notification(match_slug, event, **kwargs):
-    p_client[match_slug].trigger('new-event', event)
+    send('new-event:{slug}'.format(slug=match_slug), event)
 
 
 def push_match_created_notification(match, **kwargs):
-    p_client['feeds'].trigger('new-feed', match)
+    send('new-feed', match)

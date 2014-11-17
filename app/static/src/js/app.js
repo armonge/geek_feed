@@ -4,7 +4,7 @@ angular.module('geek_feed', [
     'ngRoute',
     'ui.bootstrap',
     'ui.date',
-    'pusher-angular'])
+])
 .config(function ($routeProvider) {
     $routeProvider
     .when('/', {
@@ -21,5 +21,6 @@ angular.module('geek_feed', [
         controller: 'FeedPushCtrl'
     })
     .otherwise({redirectTo: '/'});
+
 });
 

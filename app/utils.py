@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, print_function, absolute_import
 
+from flask import json
+from . import r_server
+
+
+def send(event, data):
+    r_server.publish('geek_feed', json.dumps({
+        'event': event,
+        'data': data
+    }))
+
 
 class Event(list):
     """Event subscription.

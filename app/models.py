@@ -2,11 +2,10 @@ import redis
 import datetime
 from flask import json
 from slugify import slugify
-from . import app
+from . import app, r_server
 from .utils import Event
 from .listeners import push_event_created_notification, push_match_created_notification
 
-r_server = redis.Redis.from_url(app.config['REDIS_URL'])
 
 matches_set_key = 'matches'
 match_mask = 'match:{slug}'

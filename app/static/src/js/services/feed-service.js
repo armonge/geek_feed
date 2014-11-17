@@ -1,29 +1,14 @@
 angular.module('geek_feed')
-.service('Feeds', function ($http, $pusher, PUSHER_KEY) {
+.service('Feeds', function ($http, socket) {
     var self = this;
     var feedsD = $http.get('/api/feeds');
-
-    self.channels = {};
-    self.getChannel = function(channel, feed){
-        if(!self.channels[channel]){
-            self.channels[channel] = pusher.subscribe(channel);
-            self.channels[channel].bind('new-event', function(data){
-                feed.events.push(angular.fromJson(data));
-            });
-        }
-        return self.channels[channel];
-    };
 
     feedsD.then(function(response){
         self.feeds = response.data.feeds;
     });
 
-    var client = new Pusher(PUSHER_KEY);
-    var pusher = $pusher(client);
-    var feedsChannel = pusher.subscribe('feeds');
-
-    feedsChannel.bind('new-feed', function(data){
-        self.feeds.push(angular.fromJson(data));
+    socket.on('new-feed', function newFeed(data){
+        self.feeds.push(data);
     });
 
     self.getEvents = function(feedSlug){
@@ -39,9 +24,10 @@ angular.module('geek_feed')
                 return null;
             }
 
-            self.getChannel(feedSlug, self.feeds[feedIndex]);
-
             if(!self.feeds[feedIndex].events){
+                socket.on('new-event:'+feedSlug, function(data){
+                    return self.feeds[feedIndex].events.push(data);
+                });
                 return self.getEvents(feedSlug).then(function(events){
                     self.feeds[feedIndex].events = events;
                     return self.feeds[feedIndex];
