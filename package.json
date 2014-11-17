@@ -1,0 +1,31 @@
+{
+  "name": "geek-feed",
+  "version": "0.0.0",
+  "description": "Gamecast for Liga Geek matches",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.8.10",
+    "gulp-angular-templatecache": "^1.4.2",
+    "gulp-bower": "0.0.7",
+    "gulp-concat": "^2.4.1",
+    "gulp-rimraf": "^0.1.1",
+    "gulp-sourcemaps": "^1.2.8",
+    "lodash": "^2.4.1",
+    "main-bower-files": "^2.4.0",
+    "run-sequence": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/armonge/geek_feed.git"
+  },
+  "author": "Andrés Reyes Monge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/armonge/geek_feed/issues"
+  },
+  "homepage": "https://github.com/armonge/geek_feed"
+}
