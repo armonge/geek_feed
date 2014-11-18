@@ -5,7 +5,9 @@ angular.module('geek_feed', [
     'ui.bootstrap',
     'ui.date',
 ])
-.config(function ($routeProvider) {
+.config(function ($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
+
     $routeProvider
     .when('/', {
         templateUrl: 'templates/feed_list.html',

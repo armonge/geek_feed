@@ -4,11 +4,11 @@
             <h1>Welcome to Geek feed!</h1>
             <ul>
                 <li ng-repeat='feed in Feeds.feeds'>
-                    <a ng-href="#/feed/{{ feed.slug }}">{{ feed.title }}</a>
+                    <a ng-href="/feed/{{ feed.slug }}">{{ feed.title }}</a>
                 </li>
             </ul>
 
-            <a class="btn btn-default" href="#/feed/new-feed">New Feed</a>
+            <a class="btn btn-default" href="/feed/new-feed">New Feed</a>
 
         </div>
     </div>

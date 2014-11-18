@@ -15,7 +15,7 @@ class GeekFeedJSONEncoder(flask.json.JSONEncoder):
         return super(GeekFeedJSONEncoder, self).default(o)
 
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='/static')
 flask.json.JSONEncoder = GeekFeedJSONEncoder
 app.config.from_object('config')
 r_server = redis.Redis.from_url(app.config['REDIS_URL'])

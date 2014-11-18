@@ -38,6 +38,8 @@ def push_feed_event(slug):
     return jsonify({'event': event, 'log': log})
 
 
-@app.route('/')
-def root():
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def root(path):
+    print(path)
     return render_template('index.html')
