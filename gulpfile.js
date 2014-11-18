@@ -10,14 +10,19 @@ var gulp           = require('gulp'),
     bower          = require('gulp-bower'),
     rimraf         = require('gulp-rimraf'),
     mainBowerFiles = require('main-bower-files'),
-    path              = require('path'),
+    path           = require('path'),
     _              = require('lodash'),
     runSequence    = require('run-sequence'),
-    templateCache = require('gulp-angular-templatecache'),
-    sourcemaps     = require('gulp-sourcemaps');
+    templateCache  = require('gulp-angular-templatecache'),
+    ngAnnotate        = require('gulp-ng-annotate'),
+    sourcemaps     = require('gulp-sourcemaps'),
+    uglify         = require('gulp-uglify'),
+    minimist          = require('minimist');
 
 var base           = 'app/static/src',
-    dest           = 'app/static/dist';
+    dest           = 'app/static/dist',
+    argv              = minimist(process.argv.slice(2)),
+    compile           = argv.compile === true;
 
 
 var jsFiles        = applyPrefix(base, ['/js/**/*.js']),
@@ -47,9 +52,11 @@ gulp.task('templates', function(){
 });
 
 gulp.task('run', function(){
-    gulp.watch(jsFiles, ['scripts']);
-    gulp.watch(templateFiles, ['templates']);
-    gulp.watch('bower.json', ['bower']);
+    if(!compile){
+        gulp.watch(jsFiles, ['scripts']);
+        gulp.watch(templateFiles, ['templates']);
+        gulp.watch('bower.json', ['bower']);
+    }
 });
 
 gulp.task('clean', function(){
@@ -59,7 +66,9 @@ gulp.task('clean', function(){
 gulp.task('scripts', function(){
     gulp.src(jsFiles)
     .pipe(sourcemaps.init())
+    .pipe(ngAnnotate())
     .pipe(concat('scripts.js'))
+    .pipe(uglify())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./app/static/dist/js/'));
 });
@@ -89,6 +98,7 @@ gulp.task('bower:scripts', function(){
     return gulp.src(mainBowerFiles({filter: '**/*.js'}))
     .pipe(sourcemaps.init())
     .pipe(concat('lib.js'))
+    .pipe(uglify())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./app/static/dist/js'));
 });
