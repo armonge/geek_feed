@@ -1,6 +1,6 @@
 angular.module('geek_feed')
-.factory('socket', function ($rootScope) {
-    var socket = new WebSocket('ws://local.ws.feed.ligageek.com/ws/');
+.factory('socket', function ($rootScope, $window) {
+    var socket = new WebSocket('ws://' + $window.location.hostname + '/ws/');
     var listeners = {};
     socket.onmessage = function(message){
         var data = angular.fromJson(message.data);
