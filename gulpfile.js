@@ -19,8 +19,8 @@ var gulp           = require('gulp'),
     uglify         = require('gulp-uglify'),
     minimist          = require('minimist');
 
-var base           = 'app/static/src',
-    dest           = 'app/static/dist',
+var base           = 'geek_feed/static/src',
+    dest           = 'geek_feed/static/dist',
     argv              = minimist(process.argv.slice(2)),
     compile           = argv.compile === true;
 
@@ -48,7 +48,7 @@ gulp.task('templates', function(){
               return 'templates/' + path.basename(file.relative);
             }
           }))
-          .pipe(gulp.dest('./app/static/dist/js'));
+          .pipe(gulp.dest('./geek_feed/static/dist/js'));
 });
 
 gulp.task('run', function(){
@@ -70,7 +70,7 @@ gulp.task('scripts', function(){
     .pipe(concat('scripts.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./app/static/dist/js/'));
+    .pipe(gulp.dest('./geek_feed/static/dist/js/'));
 });
 
 gulp.task('styles', function(){
@@ -78,7 +78,7 @@ gulp.task('styles', function(){
     .pipe(sourcemaps.init())
     .pipe(concat('styles.css'))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./app/static/dist/css/'));
+    .pipe(gulp.dest('./geek_feed/static/dist/css/'));
 });
 
 gulp.task('bower', function(cb){
@@ -91,7 +91,7 @@ gulp.task('bower', function(cb){
 
 gulp.task('bower:collect', function(){
     return bower()
-    .pipe(gulp.dest('./app/static/dist/lib'));
+    .pipe(gulp.dest('./geek_feed/static/dist/lib'));
 });
 
 gulp.task('bower:scripts', function(){
@@ -100,13 +100,13 @@ gulp.task('bower:scripts', function(){
     .pipe(concat('lib.js'))
     .pipe(uglify())
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest('./app/static/dist/js'));
+    .pipe(gulp.dest('./geek_feed/static/dist/js'));
 });
 
 gulp.task('bower:styles', function(){
     return gulp.src(mainBowerFiles({filter: '**/*.css'}))
     .pipe(concat('lib.css'))
-    .pipe(gulp.dest('./app/static/dist/css'));
+    .pipe(gulp.dest('./geek_feed/static/dist/css'));
 });
 
 function applyPrefix(prefix, patterns) {
