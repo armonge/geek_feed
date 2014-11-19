@@ -1,4 +1,4 @@
 {
-    "directory": "app/static/dist/lib",
+    "directory": "geek_feed/static/dist/lib",
     "json": "bower.json"
 }

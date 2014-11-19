@@ -1,15 +1,31 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals, print_function, absolute_import
-
-from flask import json
-from . import r_server
+import datetime
+import json
 
 
-def send(event, data):
-    r_server.publish('geek_feed', json.dumps({
-        'event': event,
-        'data': data
-    }))
+from google.appengine.api import users
+
+def send(event, message):
+    from models import Channel
+    for channel in Channel.query():
+        channel.send({
+            'event': event,
+            'data': message
+        })
+
+
+def default(o):
+    if isinstance(o, datetime.datetime):
+        return o.strftime('%s')
+
+    if isinstance(o, users.User):
+        return unicode(o.nickname)
+
+    return o
+
+
+def to_json(o):
+    return json.dumps(o, default=default)
 
 
 class Event(list):

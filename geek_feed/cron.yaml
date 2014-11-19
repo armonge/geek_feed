@@ -1,0 +1,5 @@
+cron:
+  - description: delete old channels
+    url: /channels/clean
+    schedule: every 1 hours
+

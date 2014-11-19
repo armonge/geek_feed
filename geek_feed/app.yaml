@@ -1,0 +1,17 @@
+application: rosy-clover-643
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+  - url: /static
+    static_dir: static
+  - url: /.*
+    script: geek_feed.application
+
+libraries:
+  - name: webapp2
+    version: latest
+  - name: jinja2
+    version: latest

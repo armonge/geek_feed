@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <h1>{{ feed.title }}</h1>
             <ul>
-                <li ng-repeat='event in feed.events track by event.id'>
+                <li ng-repeat='event in feed.events'>
                     {{ event.body }}
                 </li>
             </ul>

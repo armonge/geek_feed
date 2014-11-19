@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/" />
   <title>{% block title %}Geek feed{% endblock %}</title>
-  <link href="/dist/css/lib.css" rel="stylesheet">
-  <link href="/dist/css/styles.css" rel="stylesheet">
+  <link href="/static/dist/css/lib.css" rel="stylesheet">
+  <link href="/static/dist/css/styles.css" rel="stylesheet">
 </head>
 <body>
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -35,13 +35,13 @@
   {% block body %}
     <div class="container" ng-view></div>
   {% endblock %}
-  <script src="/dist/js/lib.js"></script>
-  <script src="/dist/js/scripts.js"></script>
-  <script src="/dist/js/templates.js"></script>
+  <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+  <script src="/static/dist/js/lib.js"></script>
+  <script src="/static/dist/js/scripts.js"></script>
+  <script src="/static/dist/js/templates.js"></script>
   <script>
-angular.module('geek_feed')
-.constant('PUSHER_KEY', '{{ config.PUSHER_KEY }}')
-
+    angular.module('geek_feed')
+    .constant('CHANNEL_TOKEN', '{{ token }}')
   </script>
 
 </body>
