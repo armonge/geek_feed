@@ -3,6 +3,8 @@ import datetime
 import json
 
 
+from google.appengine.api import users
+
 def send(event, message):
     from models import Channel
     for channel in Channel.query():
@@ -15,6 +17,9 @@ def send(event, message):
 def default(o):
     if isinstance(o, datetime.datetime):
         return o.strftime('%s')
+
+    if isinstance(o, users.User):
+        return unicode(o.nickname)
 
     return o
 

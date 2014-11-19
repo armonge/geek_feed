@@ -35,10 +35,16 @@ class EventsPage(webapp2.RequestHandler):
         }))
 
     def post(self, slug):
+        user = users.get_current_user()
+        if not user:
+            self.redirect(users.create_login_url(self.request.uri))
+            return
+
         values = json.loads(self.request.body)
         event = models.Event(parent=ndb.Key('Match', slug))
         event.body = values.get('body')
         event.meta = values.get('meta')
+        event.user = user
         event.put()
 
         self.response.headers['Content-Type'] = 'application/json'
@@ -54,11 +60,17 @@ class FeedsListPage(webapp2.RequestHandler):
         }))
 
     def post(self):
+        user = users.get_current_user()
+        if not user:
+            self.redirect(users.create_login_url(self.request.uri))
+            return
+
         values = json.loads(self.request.body)
         match = models.Match()
         match.title = values.get('title')
         match.team_a = values.get('team_a')
         match.team_b = values.get('team_b')
+        match.user = user
         match.put()
 
         self.response.headers['Content-Type'] = 'application/json'
